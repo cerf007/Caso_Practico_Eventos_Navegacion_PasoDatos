@@ -1,9 +1,17 @@
 package org.example.caso_practico_eventos_navegacion_pasodatos.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -32,7 +40,7 @@ public class ClienteController {
     @FXML private Button btnCancelar;
 
     private String rutaImagenSeleccionada = "";
-    private ObservableList<Cliente> listaClientes;
+    private ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
 
     public void setListaClientes(ObservableList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
@@ -44,7 +52,7 @@ public class ClienteController {
         cmbCiudad.getItems().addAll("Managua", "León", "Granada", "Masaya");
 
         txtNombres.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+            if (!event.getCharacter().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]")) {
                 event.consume();
             }
         });
@@ -69,7 +77,6 @@ public class ClienteController {
 
     @FXML
     void guardar(ActionEvent event) {
-
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setId(UUID.randomUUID().toString());
         nuevoCliente.setNombres(txtNombres.getText());
@@ -84,25 +91,27 @@ public class ClienteController {
             nuevoCliente.setTipoSolicitud(rbSeleccionado.getText());
         }
 
-
         List<String> servicios = new ArrayList<>();
-        if (chkSoporteTecnico != null && chkSoporteTecnico.isSelected()) servicios.add("Soporte Técnico");
-        if (chkMantenimiento != null && chkMantenimiento.isSelected()) servicios.add("Mantenimiento");
+        if (chkSoporteTecnico.isSelected()) {
+            servicios.add("Soporte Técnico");
+        }
+        if (chkMantenimiento.isSelected()) {
+            servicios.add("Mantenimiento");
+        }
         nuevoCliente.setServiciosInteres(servicios);
-
 
         ClienteValidador validador = new ClienteValidador();
         ResultadoValidacion resultado = validador.validar(nuevoCliente);
 
         if (!resultado.isValido()) {
             Alert.AlertType tipoAlerta = resultado.getTipo() == ResultadoValidacion.Tipo.ADVERTENCIA
-                    ? Alert.AlertType.WARNING : Alert.AlertType.ERROR;
+                    ? Alert.AlertType.WARNING
+                    : Alert.AlertType.ERROR;
             Alert alert = new Alert(tipoAlerta, resultado.getMensaje());
             alert.setHeaderText("Error de Validación");
             alert.showAndWait();
             return;
         }
-
 
         listaClientes.add(nuevoCliente);
 
@@ -118,11 +127,11 @@ public class ClienteController {
         cmbTipoCliente.getSelectionModel().clearSelection();
         cmbCiudad.getSelectionModel().clearSelection();
         dpFechaNacimiento.setValue(null);
-        if(tgTipoSolicitud.getSelectedToggle() != null) {
+        if (tgTipoSolicitud.getSelectedToggle() != null) {
             tgTipoSolicitud.getSelectedToggle().setSelected(false);
         }
-        if (chkSoporteTecnico != null) chkSoporteTecnico.setSelected(false);
-        if (chkMantenimiento != null) chkMantenimiento.setSelected(false);
+        chkSoporteTecnico.setSelected(false);
+        chkMantenimiento.setSelected(false);
         imgFoto.setImage(null);
         rutaImagenSeleccionada = "";
     }

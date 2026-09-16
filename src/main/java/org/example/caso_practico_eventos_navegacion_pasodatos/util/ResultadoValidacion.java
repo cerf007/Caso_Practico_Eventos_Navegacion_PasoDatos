@@ -22,7 +22,7 @@ public class ResultadoValidacion {
     }
 
     public static ResultadoValidacion advertencia(String mensaje) {
-        return new ResultadoValidacion(true, mensaje, Tipo.ADVERTENCIA);
+        return new ResultadoValidacion(false, mensaje, Tipo.ADVERTENCIA);
     }
 
     public boolean isValido() { return valido; }

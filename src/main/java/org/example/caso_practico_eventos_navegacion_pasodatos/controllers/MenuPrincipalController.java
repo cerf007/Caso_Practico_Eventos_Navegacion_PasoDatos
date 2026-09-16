@@ -37,7 +37,7 @@ public class MenuPrincipalController {
     @FXML
     void abrirRegistro(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/RegistroCliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/Cliente-view.fxml"));
             Parent root = loader.load();
 
             ClienteController controller = loader.getController();
@@ -55,10 +55,10 @@ public class MenuPrincipalController {
     @FXML
     void abrirConsulta(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/ConsultaCliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/Consulta-view.fxml"));
             Parent root = loader.load();
 
-            ClienteController controller = loader.getController();
+            ConsultaController controller = loader.getController();
             controller.setListaClientes(listaClientes);
 
             Stage stage = new Stage();

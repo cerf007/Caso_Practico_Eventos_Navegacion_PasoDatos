@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane fx:id="rootPane" prefHeight="420.0" prefWidth="640.0"
+            style="-fx-background-color: #f4f7fb;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.MenuPrincipalController">
+    <fx:define>
+        <ContextMenu fx:id="contextMenu"/>
+    </fx:define>
 
-</AnchorPane>
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12.0"
+              style="-fx-background-color: #2f6f9f; -fx-padding: 18 24;">
+            <Label text="Sistema de Clientes"
+                   style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Menú principal"
+                   style="-fx-text-fill: #dbeafe; -fx-font-size: 13px;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="18.0">
+            <Label text="Seleccione una opción"
+                   style="-fx-text-fill: #1f2937; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Label text="Use estos botones para registrar, consultar o exportar información."
+                   style="-fx-text-fill: #4b5563; -fx-font-size: 13px;"/>
+
+            <HBox alignment="CENTER" spacing="16.0">
+                <Button onAction="#abrirRegistro" text="Registrar cliente"
+                        prefHeight="78.0" prefWidth="160.0"
+                        style="-fx-background-color: #e0f2fe; -fx-border-color: #38bdf8; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold; -fx-text-fill: #075985;"/>
+                <Button onAction="#abrirConsulta" text="Consultar clientes"
+                        prefHeight="78.0" prefWidth="160.0"
+                        style="-fx-background-color: #dcfce7; -fx-border-color: #4ade80; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold; -fx-text-fill: #166534;"/>
+                <Button onAction="#exportarDatos" text="Exportar datos"
+                        prefHeight="78.0" prefWidth="160.0"
+                        style="-fx-background-color: #fef3c7; -fx-border-color: #fbbf24; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold; -fx-text-fill: #92400e;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 10 18;">
+            <Label text="Usuario: admin"
+                   style="-fx-text-fill: #6b7280; -fx-font-size: 12px;"/>
+        </HBox>
+    </bottom>
+
+    <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
+    </padding>
+</BorderPane>
