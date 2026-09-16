@@ -1,14 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<StackPane prefHeight="540.0" prefWidth="860.0"
+           stylesheets="@styles/login.css"
+           xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.IniciarSesionController">
+    <ImageView fitHeight="540.0" fitWidth="860.0" preserveRatio="false" styleClass="background-image">
+        <image>
+            <Image url="@images/login-pattern.png"/>
+        </image>
+    </ImageView>
 
-</AnchorPane>
+    <HBox alignment="CENTER" maxHeight="420.0" maxWidth="760.0" styleClass="login-shell">
+        <VBox alignment="CENTER_LEFT" prefWidth="350.0" spacing="18.0" styleClass="hero-panel">
+            <ImageView fitHeight="112.0" fitWidth="112.0" preserveRatio="true">
+                <image>
+                    <Image url="@images/login-logo.png"/>
+                </image>
+            </ImageView>
+            <Label styleClass="hero-title" text="Gestión de Solicitudes"/>
+            <Label styleClass="hero-copy" text="Administra clientes, solicitudes y consultas desde un menú principal sencillo." wrapText="true"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label styleClass="hero-note" text="Caso práctico: eventos, navegación y paso de datos"/>
+        </VBox>
+
+        <VBox alignment="CENTER" prefWidth="410.0" spacing="16.0" styleClass="form-panel">
+            <padding>
+                <Insets bottom="36.0" left="42.0" right="42.0" top="36.0"/>
+            </padding>
+
+            <Label styleClass="form-title" text="Iniciar sesión"/>
+            <Label styleClass="form-subtitle" text="Ingresa tus credenciales para continuar"/>
+
+            <VBox spacing="8.0">
+                <Label styleClass="field-label" text="Usuario"/>
+                <TextField fx:id="txtUsuario" promptText="admin" styleClass="login-field"/>
+            </VBox>
+
+            <VBox spacing="8.0">
+                <Label styleClass="field-label" text="Contraseña"/>
+                <PasswordField fx:id="txtPassword" promptText="••••" styleClass="login-field"/>
+            </VBox>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                <Button cancelButton="true" onAction="#salir" styleClass="secondary-button" text="Salir"/>
+                <Button fx:id="btnIniciar" defaultButton="true" onAction="#iniciarSesion" styleClass="primary-button" text="Entrar"/>
+            </HBox>
+        </VBox>
+    </HBox>
+</StackPane>

@@ -1,5 +1,7 @@
 package org.example.caso_practico_eventos_navegacion_pasodatos.util;
 
+import org.example.caso_practico_eventos_navegacion_pasodatos.models.Usuario;
+
 public class UsuarioValidador implements Validador<Usuario> {
 
     @Override
