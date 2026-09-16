@@ -1,10 +1,15 @@
 package org.example.caso_practico_eventos_navegacion_pasodatos.controllers;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -36,9 +41,7 @@ public class IniciarSesionController {
     void iniciarSesion(ActionEvent event) {
         Usuario usuario = new Usuario(txtUsuario.getText(), txtPassword.getText());
         UsuarioValidador validador = new UsuarioValidador();
-
         ResultadoValidacion resultado = validador.validar(usuario);
-
 
         if (!resultado.isValido()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -48,7 +51,6 @@ public class IniciarSesionController {
             alert.showAndWait();
             return;
         }
-
 
         if (usuario.getUsername().equals("admin") && usuario.getPassword().equals("1234")) {
             abrirVentanaPrincipal();
@@ -73,7 +75,6 @@ public class IniciarSesionController {
 
     private void abrirVentanaPrincipal() {
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/MenuPrincipal-view.fxml"));
             Parent root = loader.load();
 
@@ -84,7 +85,6 @@ public class IniciarSesionController {
 
             Stage loginStage = (Stage) btnIniciar.getScene().getWindow();
             loginStage.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
