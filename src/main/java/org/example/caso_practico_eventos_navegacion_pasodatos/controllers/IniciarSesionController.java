@@ -1,6 +1,4 @@
 package org.example.caso_practico_eventos_navegacion_pasodatos.controllers;
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,11 +8,14 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.example.caso_practico_eventos_navegacion_pasodatos.models.Usuario;
+import org.example.caso_practico_eventos_navegacion_pasodatos.util.ResultadoValidacion;
+import org.example.caso_practico_eventos_navegacion_pasodatos.util.UsuarioValidador;
 
 import java.io.IOException;
 import java.util.Optional;
 
-public class LoginController {
+public class IniciarSesionController {
 
     @FXML private TextField txtUsuario;
     @FXML private PasswordField txtPassword;
@@ -22,7 +23,6 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-
         txtPassword.setOnKeyPressed(this::manejarTeclado);
     }
 
@@ -34,17 +34,23 @@ public class LoginController {
 
     @FXML
     void iniciarSesion(ActionEvent event) {
-        String user = txtUsuario.getText();
-        String pass = txtPassword.getText();
+        Usuario usuario = new Usuario(txtUsuario.getText(), txtPassword.getText());
+        UsuarioValidador validador = new UsuarioValidador();
 
-        if (user.isEmpty() || pass.isEmpty()) {
+        ResultadoValidacion resultado = validador.validar(usuario);
 
+
+        if (!resultado.isValido()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validación");
-            alert.setHeaderText("Campos incompletos");
-            alert.setContentText("Por favor, ingrese usuario y contraseña.");
+            alert.setHeaderText("Datos incompletos");
+            alert.setContentText(resultado.getMensaje());
             alert.showAndWait();
-        } else if (user.equals("admin") && pass.equals("1234")) {
+            return;
+        }
+
+
+        if (usuario.getUsername().equals("admin") && usuario.getPassword().equals("1234")) {
             abrirVentanaPrincipal();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -55,7 +61,6 @@ public class LoginController {
 
     @FXML
     void salir(ActionEvent event) {
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar salida");
         alert.setHeaderText("¿Está seguro que desea salir?");
@@ -68,14 +73,14 @@ public class LoginController {
 
     private void abrirVentanaPrincipal() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ni/edu/uam/vistas/VentanaPrincipal.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/VentanaPrincipal.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
             stage.setTitle("Menú Principal - Sistema de Solicitudes");
             stage.setScene(new Scene(root));
             stage.show();
-
 
             Stage loginStage = (Stage) btnIniciar.getScene().getWindow();
             loginStage.close();
