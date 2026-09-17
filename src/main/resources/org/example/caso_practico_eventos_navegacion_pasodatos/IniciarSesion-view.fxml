@@ -35,18 +35,24 @@
                 </rowConstraints>
 
                 <Label style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold;" text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="txtUsuario" prefWidth="285.0" promptText="Ingrese el usuario" style="-fx-background-color: #f8fbfc; -fx-border-color: #c8d5df; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <tooltip>
-                        <Tooltip text="Usuario de prueba: admin" />
-                    </tooltip>
-                </TextField>
+                <HBox alignment="CENTER_LEFT" spacing="8.0" style="-fx-background-color: #f8fbfc; -fx-border-color: #c8d5df; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 8;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 15px;" text="👤" />
+                    <TextField fx:id="txtUsuario" prefWidth="240.0" promptText="Ingrese el usuario" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 9 0; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;">
+                        <tooltip>
+                            <Tooltip text="Usuario de prueba: admin" />
+                        </tooltip>
+                    </TextField>
+                </HBox>
 
                 <Label style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold;" text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <PasswordField fx:id="txtPassword" prefWidth="285.0" promptText="Ingrese la contraseña" style="-fx-background-color: #f8fbfc; -fx-border-color: #c8d5df; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <tooltip>
-                        <Tooltip text="Contrasena de prueba: 1234" />
-                    </tooltip>
-                </PasswordField>
+                <HBox alignment="CENTER_LEFT" spacing="8.0" style="-fx-background-color: #f8fbfc; -fx-border-color: #c8d5df; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 8;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 15px;" text="🔒" />
+                    <PasswordField fx:id="txtPassword" prefWidth="240.0" promptText="Ingrese la contraseña" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 9 0; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;">
+                        <tooltip>
+                            <Tooltip text="Contraseña de prueba: 1234" />
+                        </tooltip>
+                    </PasswordField>
+                </HBox>
 
                 <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
 

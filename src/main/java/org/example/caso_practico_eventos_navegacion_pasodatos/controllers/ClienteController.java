@@ -39,13 +39,21 @@ public class ClienteController {
     @FXML private CheckBox chkMantenimiento;
     @FXML private ListView<String> lstServiciosSeleccionados;
     @FXML private ImageView imgFoto;
+    @FXML private Button btnGuardar;
     @FXML private Button btnCancelar;
 
     private String rutaImagenSeleccionada = "";
     private ObservableList<Cliente> listaClientes = FXCollections.observableArrayList();
+    private Cliente clienteEditando;
 
     public void setListaClientes(ObservableList<Cliente> listaClientes) {
         this.listaClientes = listaClientes;
+    }
+
+    public void setClienteEditar(Cliente cliente) {
+        this.clienteEditando = cliente;
+        cargarClienteEnFormulario(cliente);
+        btnGuardar.setText("Actualizar");
     }
 
     @FXML
@@ -100,18 +108,21 @@ public class ClienteController {
 
     @FXML
     void guardar(ActionEvent event) {
-        Cliente nuevoCliente = new Cliente();
-        nuevoCliente.setId(UUID.randomUUID().toString());
-        nuevoCliente.setNombres(txtNombres.getText());
-        nuevoCliente.setApellidos(txtApellidos.getText());
-        nuevoCliente.setTipoCliente(cmbTipoCliente.getValue());
-        nuevoCliente.setCiudad(cmbCiudad.getValue());
-        nuevoCliente.setFechaNacimiento(dpFechaNacimiento.getValue());
-        nuevoCliente.setRutaFotografia(rutaImagenSeleccionada);
+        Cliente cliente = clienteEditando != null ? clienteEditando : new Cliente();
+        if (cliente.getId() == null || cliente.getId().isBlank()) {
+            cliente.setId(UUID.randomUUID().toString());
+        }
+
+        cliente.setNombres(txtNombres.getText());
+        cliente.setApellidos(txtApellidos.getText());
+        cliente.setTipoCliente(cmbTipoCliente.getValue());
+        cliente.setCiudad(cmbCiudad.getValue());
+        cliente.setFechaNacimiento(dpFechaNacimiento.getValue());
+        cliente.setRutaFotografia(rutaImagenSeleccionada);
 
         RadioButton rbSeleccionado = (RadioButton) tgTipoSolicitud.getSelectedToggle();
         if (rbSeleccionado != null) {
-            nuevoCliente.setTipoSolicitud(rbSeleccionado.getText());
+            cliente.setTipoSolicitud(rbSeleccionado.getText());
         }
 
         List<String> servicios = new ArrayList<>();
@@ -121,10 +132,10 @@ public class ClienteController {
         if (chkMantenimiento.isSelected()) {
             servicios.add("Mantenimiento");
         }
-        nuevoCliente.setServiciosInteres(servicios);
+        cliente.setServiciosInteres(servicios);
 
         ClienteValidador validador = new ClienteValidador();
-        ResultadoValidacion resultado = validador.validar(nuevoCliente);
+        ResultadoValidacion resultado = validador.validar(cliente);
 
         if (!resultado.isValido()) {
             Alert.AlertType tipoAlerta = resultado.getTipo() == ResultadoValidacion.Tipo.ADVERTENCIA
@@ -136,11 +147,25 @@ public class ClienteController {
             return;
         }
 
-        listaClientes.add(nuevoCliente);
+        if (clienteEditando == null) {
+            listaClientes.add(cliente);
+        } else {
+            int indice = listaClientes.indexOf(clienteEditando);
+            if (indice >= 0) {
+                listaClientes.set(indice, clienteEditando);
+            }
+        }
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cliente registrado exitosamente.");
+        String mensaje = clienteEditando == null
+                ? "Cliente registrado exitosamente."
+                : "Cliente actualizado exitosamente.";
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, mensaje);
         alert.showAndWait();
-        limpiar(null);
+        if (clienteEditando == null) {
+            limpiar(null);
+        } else {
+            cancelar(null);
+        }
     }
 
     @FXML
@@ -174,6 +199,48 @@ public class ClienteController {
         }
         if (chkMantenimiento.isSelected()) {
             lstServiciosSeleccionados.getItems().add("Mantenimiento");
+        }
+    }
+
+    private void cargarClienteEnFormulario(Cliente cliente) {
+        if (cliente == null) {
+            return;
+        }
+
+        txtNombres.setText(cliente.getNombres());
+        txtApellidos.setText(cliente.getApellidos());
+        cmbTipoCliente.setValue(cliente.getTipoCliente());
+        cmbCiudad.setValue(cliente.getCiudad());
+        dpFechaNacimiento.setValue(cliente.getFechaNacimiento());
+        rutaImagenSeleccionada = cliente.getRutaFotografia() != null ? cliente.getRutaFotografia() : "";
+
+        if (!rutaImagenSeleccionada.isBlank()) {
+            try {
+                imgFoto.setImage(new Image(rutaImagenSeleccionada));
+            } catch (IllegalArgumentException exception) {
+                imgFoto.setImage(null);
+            }
+        }
+
+        seleccionarTipoSolicitud(cliente.getTipoSolicitud());
+
+        List<String> servicios = cliente.getServiciosInteres();
+        chkSoporteTecnico.setSelected(servicios != null && servicios.contains("Soporte tecnico"));
+        chkMantenimiento.setSelected(servicios != null && servicios.contains("Mantenimiento"));
+        actualizarServiciosSeleccionados(null);
+    }
+
+    private void seleccionarTipoSolicitud(String tipoSolicitud) {
+        if (tipoSolicitud == null) {
+            return;
+        }
+
+        for (javafx.scene.control.Toggle toggle : tgTipoSolicitud.getToggles()) {
+            RadioButton radioButton = (RadioButton) toggle;
+            if (tipoSolicitud.equals(radioButton.getText())) {
+                tgTipoSolicitud.selectToggle(toggle);
+                return;
+            }
         }
     }
 }
