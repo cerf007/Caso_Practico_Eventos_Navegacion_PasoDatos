@@ -52,27 +52,51 @@
 
                 <Label text="Nombre completo:" GridPane.columnIndex="0" GridPane.rowIndex="0"
                        style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-                <Label fx:id="lblNombreCompleto" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label fx:id="lblNombreCompleto" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <tooltip>
+                        <Tooltip text="Nombre recibido desde la consulta"/>
+                    </tooltip>
+                </Label>
 
                 <Label text="Tipo de cliente:" GridPane.columnIndex="0" GridPane.rowIndex="1"
                        style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-                <Label fx:id="lblTipoCliente" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label fx:id="lblTipoCliente" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <tooltip>
+                        <Tooltip text="Tipo de cliente seleccionado en el registro"/>
+                    </tooltip>
+                </Label>
 
                 <Label text="Ciudad:" GridPane.columnIndex="0" GridPane.rowIndex="2"
                        style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-                <Label fx:id="lblCiudad" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label fx:id="lblCiudad" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <tooltip>
+                        <Tooltip text="Ciudad registrada para el cliente"/>
+                    </tooltip>
+                </Label>
 
                 <Label text="Fecha de nacimiento:" GridPane.columnIndex="0" GridPane.rowIndex="3"
                        style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-                <Label fx:id="lblFechaNacimiento" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label fx:id="lblFechaNacimiento" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <tooltip>
+                        <Tooltip text="Fecha de nacimiento registrada"/>
+                    </tooltip>
+                </Label>
 
                 <Label text="Tipo de solicitud:" GridPane.columnIndex="0" GridPane.rowIndex="4"
                        style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-                <Label fx:id="lblTipoSolicitud" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label fx:id="lblTipoSolicitud" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <tooltip>
+                        <Tooltip text="Tipo de solicitud enviada al detalle"/>
+                    </tooltip>
+                </Label>
 
                 <Label text="Servicios de interes:" GridPane.columnIndex="0" GridPane.rowIndex="5"
                        style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-                <Label fx:id="lblServicios" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Label fx:id="lblServicios" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <tooltip>
+                        <Tooltip text="Servicios de interes seleccionados"/>
+                    </tooltip>
+                </Label>
             </GridPane>
         </HBox>
     </center>

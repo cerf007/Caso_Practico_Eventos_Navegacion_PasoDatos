@@ -68,7 +68,11 @@
             <Label text="Apellidos:" GridPane.columnIndex="0" GridPane.rowIndex="1"
                    style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
             <TextField fx:id="txtApellidos" promptText="Ingrese apellidos" prefWidth="290.0"
-                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                       GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <tooltip>
+                    <Tooltip text="Ingrese los apellidos del cliente"/>
+                </tooltip>
+            </TextField>
 
             <Label text="Tipo de cliente:" GridPane.columnIndex="0" GridPane.rowIndex="2"
                    style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
@@ -88,7 +92,11 @@
 
             <Label text="Fecha de nacimiento:" GridPane.columnIndex="0" GridPane.rowIndex="4"
                    style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
-            <DatePicker fx:id="dpFechaNacimiento" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <DatePicker fx:id="dpFechaNacimiento" prefWidth="290.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <tooltip>
+                    <Tooltip text="Seleccione la fecha de nacimiento del cliente"/>
+                </tooltip>
+            </DatePicker>
 
             <Label text="Tipo de solicitud:" GridPane.columnIndex="0" GridPane.rowIndex="5"
                    style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
@@ -97,16 +105,35 @@
                     <toggleGroup>
                         <ToggleGroup fx:id="tgTipoSolicitud"/>
                     </toggleGroup>
+                    <tooltip>
+                        <Tooltip text="Solicitud para instalacion de servicio"/>
+                    </tooltip>
                 </RadioButton>
-                <RadioButton text="Reparacion" toggleGroup="$tgTipoSolicitud"/>
-                <RadioButton text="Consulta" toggleGroup="$tgTipoSolicitud"/>
+                <RadioButton text="Reparacion" toggleGroup="$tgTipoSolicitud">
+                    <tooltip>
+                        <Tooltip text="Solicitud para reparacion o soporte"/>
+                    </tooltip>
+                </RadioButton>
+                <RadioButton text="Consulta" toggleGroup="$tgTipoSolicitud">
+                    <tooltip>
+                        <Tooltip text="Solicitud para consulta de informacion"/>
+                    </tooltip>
+                </RadioButton>
             </HBox>
 
             <Label text="Servicios de interes:" GridPane.columnIndex="0" GridPane.rowIndex="6"
                    style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
             <HBox spacing="18.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                <CheckBox fx:id="chkSoporteTecnico" text="Soporte tecnico"/>
-                <CheckBox fx:id="chkMantenimiento" text="Mantenimiento"/>
+                <CheckBox fx:id="chkSoporteTecnico" text="Soporte tecnico">
+                    <tooltip>
+                        <Tooltip text="Agrega soporte tecnico a los servicios de interes"/>
+                    </tooltip>
+                </CheckBox>
+                <CheckBox fx:id="chkMantenimiento" text="Mantenimiento">
+                    <tooltip>
+                        <Tooltip text="Agrega mantenimiento a los servicios de interes"/>
+                    </tooltip>
+                </CheckBox>
             </HBox>
 
             <Label text="Fotografia:" GridPane.columnIndex="0" GridPane.rowIndex="7"
@@ -117,6 +144,9 @@
                 <VBox spacing="8.0">
                     <Button text="Seleccionar fotografia" onAction="#seleccionarFoto"
                             style="-fx-background-color: #f7fafc; -fx-border-color: #b7c5cf; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #173042; -fx-padding: 8 14;">
+                        <graphic>
+                            <Label text="&#128247;" style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 13px;"/>
+                        </graphic>
                         <tooltip>
                             <Tooltip text="Abre FileChooser para seleccionar una imagen"/>
                         </tooltip>
@@ -129,23 +159,44 @@
             <Label text="Servicios seleccionados:" GridPane.columnIndex="0" GridPane.rowIndex="8"
                    style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold;"/>
             <ListView fx:id="lstServiciosSeleccionados" prefHeight="78.0" prefWidth="290.0"
-                      GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                      GridPane.columnIndex="1" GridPane.rowIndex="8">
+                <tooltip>
+                    <Tooltip text="Muestra los servicios seleccionados con los CheckBox"/>
+                </tooltip>
+            </ListView>
         </GridPane>
     </center>
 
     <bottom>
         <HBox alignment="CENTER_RIGHT" spacing="10.0"
               style="-fx-background-color: white; -fx-border-color: #dce5ec transparent transparent transparent; -fx-padding: 12 20;">
-            <Button text="Guardar" onAction="#guardar" defaultButton="true"
+            <Button fx:id="btnGuardar" text="Guardar" onAction="#guardar" defaultButton="true"
                     style="-fx-background-color: #0e7182; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold; -fx-padding: 8 18;">
+                <graphic>
+                    <Label text="&#128190;" style="-fx-text-fill: white; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 13px;"/>
+                </graphic>
                 <tooltip>
                     <Tooltip text="Valida y guarda el cliente en memoria"/>
                 </tooltip>
             </Button>
             <Button text="Limpiar" onAction="#limpiar"
-                    style="-fx-background-color: #f7fafc; -fx-border-color: #b7c5cf; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #173042; -fx-padding: 8 16;"/>
+                    style="-fx-background-color: #f7fafc; -fx-border-color: #b7c5cf; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #173042; -fx-padding: 8 16;">
+                <graphic>
+                    <Label text="&#9003;" style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px;"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="Borra todos los campos del formulario"/>
+                </tooltip>
+            </Button>
             <Button fx:id="btnCancelar" text="Cancelar" cancelButton="true" onAction="#cancelar"
-                    style="-fx-background-color: #fff5f5; -fx-border-color: #d99a9a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #8a1f1f; -fx-padding: 8 16;"/>
+                    style="-fx-background-color: #fff5f5; -fx-border-color: #d99a9a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #8a1f1f; -fx-padding: 8 16;">
+                <graphic>
+                    <Label text="X" style="-fx-text-fill: #8a1f1f; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold;"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="Cierra la ventana de registro"/>
+                </tooltip>
+            </Button>
         </HBox>
     </bottom>
 </BorderPane>

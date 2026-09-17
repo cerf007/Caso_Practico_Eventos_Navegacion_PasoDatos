@@ -35,8 +35,13 @@
                            style="-fx-text-fill: #d6e8ef; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
                 </VBox>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label text="Usuario activo: admin"
-                       style="-fx-text-fill: #d6e8ef; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
+                <HBox alignment="CENTER" spacing="8.0"
+                      style="-fx-background-color: rgba(255,255,255,0.14); -fx-background-radius: 18; -fx-padding: 6 12;">
+                    <Label text="&#128100;"
+                           style="-fx-text-fill: white; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 18px;"/>
+                    <Label text="Usuario activo: admin"
+                           style="-fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                </HBox>
             </HBox>
 
             <MenuBar>
@@ -93,22 +98,46 @@
             </VBox>
 
             <HBox alignment="CENTER" spacing="18.0">
-                <Button onAction="#abrirRegistro" text="Registrar cliente" prefHeight="100.0" prefWidth="190.0"
+                <Button onAction="#abrirRegistro" prefHeight="118.0" prefWidth="150.0"
                         style="-fx-background-color: white; -fx-border-color: #0e7182; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #0e5160; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 15px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.12), 12, 0, 0, 3);">
+                    <graphic>
+                        <VBox alignment="CENTER" spacing="8.0">
+                            <Label text="&#128100;"
+                                   style="-fx-text-fill: #6c4df6; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 34px;"/>
+                            <Label text="Registrar&#10;Cliente"
+                                   style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-alignment: center;"/>
+                        </VBox>
+                    </graphic>
                     <tooltip>
-                        <Tooltip text="Captura datos del cliente y de su solicitud"/>
+                        <Tooltip text="Registrar cliente"/>
                     </tooltip>
                 </Button>
-                <Button onAction="#abrirConsulta" text="Consultar clientes" prefHeight="100.0" prefWidth="190.0"
+                <Button onAction="#abrirConsulta" prefHeight="118.0" prefWidth="150.0"
                         style="-fx-background-color: white; -fx-border-color: #0e7182; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #0e5160; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 15px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.12), 12, 0, 0, 3);">
+                    <graphic>
+                        <VBox alignment="CENTER" spacing="8.0">
+                            <Label text="&#9776;"
+                                   style="-fx-text-fill: #0e7182; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 35px;"/>
+                            <Label text="Consultar&#10;Clientes"
+                                   style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-alignment: center;"/>
+                        </VBox>
+                    </graphic>
                     <tooltip>
-                        <Tooltip text="Abre la tabla de clientes registrados"/>
+                        <Tooltip text="Consultar clientes"/>
                     </tooltip>
                 </Button>
-                <Button onAction="#exportarDatos" text="Exportar datos" prefHeight="100.0" prefWidth="190.0"
+                <Button onAction="#exportarDatos" prefHeight="118.0" prefWidth="150.0"
                         style="-fx-background-color: white; -fx-border-color: #8ea1ad; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #344653; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 15px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.12), 12, 0, 0, 3);">
+                    <graphic>
+                        <VBox alignment="CENTER" spacing="8.0">
+                            <Label text="&#128196;"
+                                   style="-fx-text-fill: #e46b2d; -fx-font-family: 'Segoe UI Emoji'; -fx-font-size: 34px;"/>
+                            <Label text="Exportar&#10;Datos"
+                                   style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-alignment: center;"/>
+                        </VBox>
+                    </graphic>
                     <tooltip>
-                        <Tooltip text="Usa DirectoryChooser para seleccionar una carpeta"/>
+                        <Tooltip text="Exportar datos"/>
                     </tooltip>
                 </Button>
             </HBox>
