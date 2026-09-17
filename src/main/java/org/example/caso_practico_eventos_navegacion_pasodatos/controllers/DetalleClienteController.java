@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import org.example.caso_practico_eventos_navegacion_pasodatos.models.Cliente;
+import org.example.caso_practico_eventos_navegacion_pasodatos.util.SceneManager;
 
 public class DetalleClienteController {
 
@@ -20,16 +20,12 @@ public class DetalleClienteController {
     @FXML private Button btnCerrar;
 
     public void setCliente(Cliente cliente) {
-        if (cliente == null) {
-            return;
-        }
+        if (cliente == null) return;
 
         lblNombreCompleto.setText(cliente.getNombreCompleto());
         lblTipoCliente.setText(valor(cliente.getTipoCliente()));
         lblCiudad.setText(valor(cliente.getCiudad()));
-        lblFechaNacimiento.setText(cliente.getFechaNacimiento() != null
-                ? cliente.getFechaNacimiento().toString()
-                : "No ingresada");
+        lblFechaNacimiento.setText(cliente.getFechaNacimiento() != null ? cliente.getFechaNacimiento().toString() : "No ingresada");
         lblTipoSolicitud.setText(valor(cliente.getTipoSolicitud()));
 
         String servicios = cliente.getServiciosInteres() != null && !cliente.getServiciosInteres().isEmpty()
@@ -48,8 +44,7 @@ public class DetalleClienteController {
 
     @FXML
     void cerrarVentana() {
-        Stage stage = (Stage) btnCerrar.getScene().getWindow();
-        stage.close();
+        SceneManager.cerrarVentana(btnCerrar);
     }
 
     private String valor(String texto) {

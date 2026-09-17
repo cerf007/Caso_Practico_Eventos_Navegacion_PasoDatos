@@ -4,21 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import org.example.caso_practico_eventos_navegacion_pasodatos.models.Cliente;
+import org.example.caso_practico_eventos_navegacion_pasodatos.util.SceneManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,24 +30,17 @@ public class MenuPrincipalController {
         itemResumen.setOnAction(e -> mostrarTotalClientes());
 
         contextMenu.getItems().addAll(itemConsultar, itemResumen);
-
-        rootPane.setOnContextMenuRequested(e ->
-                contextMenu.show(rootPane, e.getScreenX(), e.getScreenY()));
+        rootPane.setOnContextMenuRequested(e -> contextMenu.show(rootPane, e.getScreenX(), e.getScreenY()));
     }
 
     @FXML
     void abrirRegistro(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/Cliente-view.fxml"));
-            Parent root = loader.load();
-
-            ClienteController controller = loader.getController();
-            controller.setListaClientes(listaClientes);
-
-            Stage stage = new Stage();
-            stage.setTitle("Registro de Cliente");
-            stage.setScene(new Scene(root));
-            stage.show();
+            SceneManager.<ClienteController>abrirVentanaModal(
+                    "/org/example/caso_practico_eventos_navegacion_pasodatos/Cliente-view.fxml",
+                    "Registro de Cliente",
+                    controller -> controller.setListaClientes(listaClientes)
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,16 +49,11 @@ public class MenuPrincipalController {
     @FXML
     void abrirConsulta(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/caso_practico_eventos_navegacion_pasodatos/Consulta-view.fxml"));
-            Parent root = loader.load();
-
-            ConsultaController controller = loader.getController();
-            controller.setListaClientes(listaClientes);
-
-            Stage stage = new Stage();
-            stage.setTitle("Consulta de Clientes");
-            stage.setScene(new Scene(root));
-            stage.show();
+            SceneManager.<ConsultaController>abrirVentanaModal(
+                    "/org/example/caso_practico_eventos_navegacion_pasodatos/Consulta-view.fxml",
+                    "Consulta de Clientes",
+                    controller -> controller.setListaClientes(listaClientes)
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,8 +63,7 @@ public class MenuPrincipalController {
     void exportarDatos(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Seleccionar carpeta para exportar reportes");
-        Stage stage = (Stage) rootPane.getScene().getWindow();
-        File selectedDirectory = directoryChooser.showDialog(stage);
+        File selectedDirectory = directoryChooser.showDialog(rootPane.getScene().getWindow());
 
         if (selectedDirectory != null) {
             System.out.println("Carpeta seleccionada: " + selectedDirectory.getAbsolutePath());
@@ -100,7 +78,7 @@ public class MenuPrincipalController {
     @FXML
     void mostrarDialogoSistema(ActionEvent event) {
         Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Informacion del sistema");
+        dialog.setTitle("Información del sistema");
         dialog.setHeaderText("Sistema de registro de clientes");
 
         DialogPane dialogPane = dialog.getDialogPane();
@@ -108,7 +86,7 @@ public class MenuPrincipalController {
 
         VBox contenido = new VBox(8);
         contenido.getChildren().add(new Label("Clientes registrados: " + listaClientes.size()));
-        contenido.getChildren().add(new Label("Use el menu o la barra de herramientas para navegar."));
+        contenido.getChildren().add(new Label("Use el menú o la barra de herramientas para navegar."));
         contenido.getChildren().add(new Label("El registro, consulta y detalle comparten datos en memoria."));
 
         dialogPane.setContent(contenido);
