@@ -4,13 +4,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" prefHeight="420.0" prefWidth="640.0"
-            style="-fx-background-color: #f4f7fb;"
+<BorderPane fx:id="rootPane" prefHeight="520.0" prefWidth="820.0"
+            style="-fx-background-color: #eef3f6;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.MenuPrincipalController">
@@ -19,45 +25,103 @@
     </fx:define>
 
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="12.0"
-              style="-fx-background-color: #2f6f9f; -fx-padding: 18 24;">
-            <Label text="Sistema de Clientes"
-                   style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Label text="Menú principal"
-                   style="-fx-text-fill: #dbeafe; -fx-font-size: 13px;"/>
-        </HBox>
+        <VBox>
+            <HBox alignment="CENTER_LEFT" spacing="12.0"
+                  style="-fx-background-color: linear-gradient(to right, #0f2d3d, #1f5d73); -fx-padding: 18 28;">
+                <VBox spacing="2.0">
+                    <Label text="Sistema de Solicitudes de Clientes"
+                           style="-fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                    <Label text="Menu principal de navegacion"
+                           style="-fx-text-fill: #d6e8ef; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Usuario activo: admin"
+                       style="-fx-text-fill: #d6e8ef; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
+            </HBox>
+
+            <MenuBar>
+                <menus>
+                    <Menu text="Clientes">
+                        <items>
+                            <MenuItem text="Registrar cliente" onAction="#abrirRegistro"/>
+                            <MenuItem text="Consultar clientes" onAction="#abrirConsulta"/>
+                            <SeparatorMenuItem/>
+                            <MenuItem text="Exportar datos" onAction="#exportarDatos"/>
+                        </items>
+                    </Menu>
+                    <Menu text="Acciones">
+                        <items>
+                            <MenuItem text="Refrescar sistema" onAction="#refrescarSistema"/>
+                            <MenuItem text="Informacion del sistema" onAction="#mostrarDialogoSistema"/>
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+
+            <ToolBar style="-fx-background-color: #f8fbfc; -fx-border-color: #dce5ec transparent #dce5ec transparent;">
+                <items>
+                    <Button text="Registrar cliente" onAction="#abrirRegistro"
+                            style="-fx-background-color: white; -fx-border-color: #b7c5cf; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #173042;">
+                        <tooltip>
+                            <Tooltip text="Abre el formulario de registro"/>
+                        </tooltip>
+                    </Button>
+                    <Button text="Consultar clientes" onAction="#abrirConsulta"
+                            style="-fx-background-color: white; -fx-border-color: #b7c5cf; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #173042;">
+                        <tooltip>
+                            <Tooltip text="Muestra los clientes registrados en una tabla"/>
+                        </tooltip>
+                    </Button>
+                    <Button text="Exportar datos" onAction="#exportarDatos"
+                            style="-fx-background-color: white; -fx-border-color: #b7c5cf; -fx-border-radius: 7; -fx-background-radius: 7; -fx-text-fill: #173042;">
+                        <tooltip>
+                            <Tooltip text="Selecciona una carpeta para exportar reportes"/>
+                        </tooltip>
+                    </Button>
+                </items>
+            </ToolBar>
+        </VBox>
     </top>
 
     <center>
-        <VBox alignment="CENTER" spacing="18.0">
-            <Label text="Seleccione una opción"
-                   style="-fx-text-fill: #1f2937; -fx-font-size: 20px; -fx-font-weight: bold;"/>
-            <Label text="Use estos botones para registrar, consultar o exportar información."
-                   style="-fx-text-fill: #4b5563; -fx-font-size: 13px;"/>
+        <VBox alignment="CENTER" spacing="20.0" style="-fx-padding: 30;">
+            <VBox alignment="CENTER" spacing="8.0">
+                <Label text="Gestion de solicitudes"
+                       style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+                <Label text="Seleccione una accion para registrar, consultar o exportar informacion."
+                       style="-fx-text-fill: #657785; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
+            </VBox>
 
-            <HBox alignment="CENTER" spacing="16.0">
-                <Button onAction="#abrirRegistro" text="Registrar cliente"
-                        prefHeight="78.0" prefWidth="160.0"
-                        style="-fx-background-color: #e0f2fe; -fx-border-color: #38bdf8; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold; -fx-text-fill: #075985;"/>
-                <Button onAction="#abrirConsulta" text="Consultar clientes"
-                        prefHeight="78.0" prefWidth="160.0"
-                        style="-fx-background-color: #dcfce7; -fx-border-color: #4ade80; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold; -fx-text-fill: #166534;"/>
-                <Button onAction="#exportarDatos" text="Exportar datos"
-                        prefHeight="78.0" prefWidth="160.0"
-                        style="-fx-background-color: #fef3c7; -fx-border-color: #fbbf24; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-weight: bold; -fx-text-fill: #92400e;"/>
+            <HBox alignment="CENTER" spacing="18.0">
+                <Button onAction="#abrirRegistro" text="Registrar cliente" prefHeight="100.0" prefWidth="190.0"
+                        style="-fx-background-color: white; -fx-border-color: #0e7182; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #0e5160; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 15px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.12), 12, 0, 0, 3);">
+                    <tooltip>
+                        <Tooltip text="Captura datos del cliente y de su solicitud"/>
+                    </tooltip>
+                </Button>
+                <Button onAction="#abrirConsulta" text="Consultar clientes" prefHeight="100.0" prefWidth="190.0"
+                        style="-fx-background-color: white; -fx-border-color: #0e7182; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #0e5160; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 15px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.12), 12, 0, 0, 3);">
+                    <tooltip>
+                        <Tooltip text="Abre la tabla de clientes registrados"/>
+                    </tooltip>
+                </Button>
+                <Button onAction="#exportarDatos" text="Exportar datos" prefHeight="100.0" prefWidth="190.0"
+                        style="-fx-background-color: white; -fx-border-color: #8ea1ad; -fx-border-radius: 12; -fx-background-radius: 12; -fx-text-fill: #344653; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 15px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.12), 12, 0, 0, 3);">
+                    <tooltip>
+                        <Tooltip text="Usa DirectoryChooser para seleccionar una carpeta"/>
+                    </tooltip>
+                </Button>
             </HBox>
+
+            <Label text="Clic derecho sobre esta ventana para abrir el menu contextual."
+                   style="-fx-text-fill: #657785; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
         </VBox>
     </center>
 
     <bottom>
-        <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 10 18;">
-            <Label text="Usuario: admin"
-                   style="-fx-text-fill: #6b7280; -fx-font-size: 12px;"/>
+        <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-border-color: #dce5ec transparent transparent transparent; -fx-padding: 12 20;">
+            <Label text="Aplicacion de escritorio para registro y consulta de solicitudes"
+                   style="-fx-text-fill: #657785; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
         </HBox>
     </bottom>
-
-    <padding>
-        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
-    </padding>
 </BorderPane>

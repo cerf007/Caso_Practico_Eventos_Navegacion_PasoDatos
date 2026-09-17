@@ -36,7 +36,7 @@ public class ClienteValidador implements Validador<Cliente> {
         }
 
         if (cliente.getServiciosInteres() == null || cliente.getServiciosInteres().isEmpty()) {
-            return ResultadoValidacion.advertencia("Debe seleccionar al menos un servicio de interés.");
+            return ResultadoValidacion.advertencia("Debe seleccionar al menos un servicio de interes.");
         }
 
         return ResultadoValidacion.exito();

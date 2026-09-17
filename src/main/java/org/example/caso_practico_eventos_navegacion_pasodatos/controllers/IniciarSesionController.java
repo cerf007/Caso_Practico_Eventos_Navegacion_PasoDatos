@@ -45,7 +45,7 @@ public class IniciarSesionController {
 
         if (!resultado.isValido()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Validación");
+            alert.setTitle("Validacion");
             alert.setHeaderText("Datos incompletos");
             alert.setContentText(resultado.getMensaje());
             alert.showAndWait();
@@ -65,7 +65,7 @@ public class IniciarSesionController {
     void salir(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmar salida");
-        alert.setHeaderText("¿Está seguro que desea salir?");
+        alert.setHeaderText("Esta seguro que desea salir?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -79,7 +79,7 @@ public class IniciarSesionController {
             Parent root = loader.load();
 
             Stage stage = new Stage();
-            stage.setTitle("Menú Principal - Sistema de Solicitudes");
+            stage.setTitle("Menu Principal - Sistema de Solicitudes");
             stage.setScene(new Scene(root));
             stage.show();
 
