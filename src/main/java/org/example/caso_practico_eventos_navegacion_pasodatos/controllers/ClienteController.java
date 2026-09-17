@@ -4,15 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -23,6 +15,7 @@ import org.example.caso_practico_eventos_navegacion_pasodatos.util.ClienteValida
 import org.example.caso_practico_eventos_navegacion_pasodatos.util.ResultadoValidacion;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -60,28 +53,27 @@ public class ClienteController {
     public void initialize() {
         cmbTipoCliente.getItems().addAll("Persona Natural", "Empresa");
         cmbCiudad.getItems().addAll(
-                "Boaco",
-                "Bluefields",
-                "Chinandega",
-                "Esteli",
-                "Granada",
-                "Jinotega",
-                "Jinotepe",
-                "Juigalpa",
-                "Leon",
-                "Managua",
-                "Masaya",
-                "Matagalpa",
-                "Ocotal",
-                "Puerto Cabezas",
-                "Rivas",
-                "San Carlos",
-                "Somoto"
+                "Boaco", "Bluefields", "Chinandega", "Estelí", "Granada", "Jinotega",
+                "Jinotepe", "Juigalpa", "León", "Managua", "Masaya", "Matagalpa",
+                "Ocotal", "Puerto Cabezas", "Rivas", "San Carlos", "Somoto"
         );
 
-        txtNombres.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
+        javafx.event.EventHandler<KeyEvent> filtroSoloLetras = event -> {
+            if (!event.getCharacter().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]")) {
                 event.consume();
+            }
+        };
+        txtNombres.addEventFilter(KeyEvent.KEY_TYPED, filtroSoloLetras);
+        txtApellidos.addEventFilter(KeyEvent.KEY_TYPED, filtroSoloLetras);
+
+        dpFechaNacimiento.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (date != null && !empty && !date.isBefore(LocalDate.now())) {
+                    setDisable(true);
+                    setStyle("-fx-background-color: #f0f0f0;");
+                }
             }
         });
 
@@ -92,9 +84,9 @@ public class ClienteController {
     @FXML
     void seleccionarFoto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar Fotografia");
+        fileChooser.setTitle("Seleccionar Fotografía");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
         );
 
         Stage stage = (Stage) txtNombres.getScene().getWindow();
@@ -127,7 +119,7 @@ public class ClienteController {
 
         List<String> servicios = new ArrayList<>();
         if (chkSoporteTecnico.isSelected()) {
-            servicios.add("Soporte tecnico");
+            servicios.add("Soporte técnico");
         }
         if (chkMantenimiento.isSelected()) {
             servicios.add("Mantenimiento");
@@ -137,13 +129,12 @@ public class ClienteController {
         ClienteValidador validador = new ClienteValidador();
         ResultadoValidacion resultado = validador.validar(cliente);
 
-        if (!resultado.isValido()) {
-            Alert.AlertType tipoAlerta = resultado.getTipo() == ResultadoValidacion.Tipo.ADVERTENCIA
-                    ? Alert.AlertType.WARNING
-                    : Alert.AlertType.ERROR;
-            Alert alert = new Alert(tipoAlerta, resultado.getMensaje());
-            alert.setHeaderText("Error de Validacion");
-            alert.showAndWait();
+        // Control explícito de Errores y Advertencias
+        if (resultado.getTipo() == ResultadoValidacion.Tipo.ERROR) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Error de Validación", resultado.getMensaje());
+            return;
+        } else if (resultado.getTipo() == ResultadoValidacion.Tipo.ADVERTENCIA) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", resultado.getMensaje());
             return;
         }
 
@@ -159,8 +150,8 @@ public class ClienteController {
         String mensaje = clienteEditando == null
                 ? "Cliente registrado exitosamente."
                 : "Cliente actualizado exitosamente.";
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, mensaje);
-        alert.showAndWait();
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", mensaje);
+
         if (clienteEditando == null) {
             limpiar(null);
         } else {
@@ -183,6 +174,10 @@ public class ClienteController {
         actualizarServiciosSeleccionados(null);
         imgFoto.setImage(null);
         rutaImagenSeleccionada = "";
+
+        // Resetear estado de edición
+        clienteEditando = null;
+        btnGuardar.setText("Guardar");
     }
 
     @FXML
@@ -195,7 +190,7 @@ public class ClienteController {
     void actualizarServiciosSeleccionados(ActionEvent event) {
         lstServiciosSeleccionados.getItems().clear();
         if (chkSoporteTecnico.isSelected()) {
-            lstServiciosSeleccionados.getItems().add("Soporte tecnico");
+            lstServiciosSeleccionados.getItems().add("Soporte técnico");
         }
         if (chkMantenimiento.isSelected()) {
             lstServiciosSeleccionados.getItems().add("Mantenimiento");
@@ -203,9 +198,7 @@ public class ClienteController {
     }
 
     private void cargarClienteEnFormulario(Cliente cliente) {
-        if (cliente == null) {
-            return;
-        }
+        if (cliente == null) return;
 
         txtNombres.setText(cliente.getNombres());
         txtApellidos.setText(cliente.getApellidos());
@@ -217,7 +210,7 @@ public class ClienteController {
         if (!rutaImagenSeleccionada.isBlank()) {
             try {
                 imgFoto.setImage(new Image(rutaImagenSeleccionada));
-            } catch (IllegalArgumentException exception) {
+            } catch (Exception exception) {
                 imgFoto.setImage(null);
             }
         }
@@ -225,22 +218,26 @@ public class ClienteController {
         seleccionarTipoSolicitud(cliente.getTipoSolicitud());
 
         List<String> servicios = cliente.getServiciosInteres();
-        chkSoporteTecnico.setSelected(servicios != null && servicios.contains("Soporte tecnico"));
+        chkSoporteTecnico.setSelected(servicios != null && servicios.contains("Soporte técnico"));
         chkMantenimiento.setSelected(servicios != null && servicios.contains("Mantenimiento"));
         actualizarServiciosSeleccionados(null);
     }
 
     private void seleccionarTipoSolicitud(String tipoSolicitud) {
-        if (tipoSolicitud == null) {
-            return;
-        }
+        if (tipoSolicitud == null) return;
 
-        for (javafx.scene.control.Toggle toggle : tgTipoSolicitud.getToggles()) {
+        for (Toggle toggle : tgTipoSolicitud.getToggles()) {
             RadioButton radioButton = (RadioButton) toggle;
             if (tipoSolicitud.equals(radioButton.getText())) {
                 tgTipoSolicitud.selectToggle(toggle);
                 return;
             }
         }
+    }
+
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alert = new Alert(tipo, mensaje);
+        alert.setHeaderText(titulo);
+        alert.showAndWait();
     }
 }

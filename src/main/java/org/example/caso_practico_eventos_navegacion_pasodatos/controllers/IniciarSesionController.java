@@ -27,17 +27,6 @@ public class IniciarSesionController {
     @FXML private Button btnIniciar;
 
     @FXML
-    public void initialize() {
-        txtPassword.setOnKeyPressed(this::manejarTeclado);
-    }
-
-    private void manejarTeclado(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            iniciarSesion(new ActionEvent());
-        }
-    }
-
-    @FXML
     void iniciarSesion(ActionEvent event) {
         Usuario usuario = new Usuario(txtUsuario.getText(), txtPassword.getText());
         UsuarioValidador validador = new UsuarioValidador();
