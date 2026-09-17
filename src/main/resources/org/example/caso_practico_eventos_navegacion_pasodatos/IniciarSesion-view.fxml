@@ -21,7 +21,7 @@
                 <Label style="-fx-text-fill: #657785; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;" text="Ingrese sus credenciales para continuar al menu principal" />
             </VBox>
 
-            <GridPane alignment="CENTER" hgap="14.0" maxWidth="540.0" prefWidth="540.0" style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #d0dbe3; -fx-border-radius: 14; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.14), 16, 0, 0, 4);" vgap="13.0">
+            <GridPane alignment="CENTER" hgap="14.0" maxWidth="540.0" prefHeight="269.0" prefWidth="496.0" style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #d0dbe3; -fx-border-radius: 14; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.14), 16, 0, 0, 4);" vgap="13.0">
                 <columnConstraints>
                     <ColumnConstraints minWidth="120.0" />
                     <ColumnConstraints minWidth="285.0" />
@@ -56,7 +56,7 @@
 
                 <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
 
-                <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                     <Button cancelButton="true" onAction="#salir" style="-fx-background-color: #fff5f5; -fx-border-color: #d99a9a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #8a1f1f; -fx-font-family: 'Segoe UI Semibold'; -fx-padding: 8 16;" text="Salir">
                         <tooltip>
                             <Tooltip text="Solicita confirmacion antes de cerrar la aplicacion" />
@@ -67,11 +67,6 @@
                             <Tooltip text="Valida los campos y abre la ventana principal" />
                         </tooltip>
                     </Button>
-                </HBox>
-
-                <HBox alignment="CENTER_LEFT" spacing="8.0" style="-fx-background-color: #f4f8fa; -fx-background-radius: 8; -fx-border-color: #d8e4ea; -fx-border-radius: 8; -fx-padding: 8 10;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
-                    <Label style="-fx-text-fill: #506575; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 12px;" text="Credenciales:" />
-                    <Label style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 12px; -fx-font-weight: bold;" text="admin / 1234" />
                 </HBox>
             </GridPane>
         </VBox>
