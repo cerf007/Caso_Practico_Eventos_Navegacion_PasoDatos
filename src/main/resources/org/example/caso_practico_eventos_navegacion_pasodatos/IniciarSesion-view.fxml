@@ -1,64 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<BorderPane prefHeight="420.0" prefWidth="640.0"
-            style="-fx-background-color: #f4f7fb;"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.IniciarSesionController">
+<BorderPane prefHeight="520.0" prefWidth="780.0" style="-fx-background-color: #edf2f7;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.IniciarSesionController">
+
     <top>
-        <HBox alignment="CENTER_LEFT" style="-fx-background-color: #2f6f9f; -fx-padding: 18 24;">
-            <Label text="Sistema de Clientes"
-                   style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+        <HBox alignment="CENTER_LEFT" spacing="14.0" style="-fx-background-color: #123047; -fx-padding: 18 26;">
+            <VBox spacing="2.0">
+                <Label style="-fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 22px; -fx-font-weight: bold;" text="Sistema de Solicitudes de Clientes" />
+                <Label style="-fx-text-fill: #cfe2ea; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;" text="Acceso al sistema de registro y consulta" />
+            </VBox>
         </HBox>
     </top>
 
     <center>
-        <VBox alignment="CENTER" spacing="18.0">
-            <Label text="Inicio de Sesión"
-                   style="-fx-text-fill: #1f2937; -fx-font-size: 20px; -fx-font-weight: bold;"/>
-            <Label text="Ingrese usuario y contraseña para continuar."
-                   style="-fx-text-fill: #4b5563; -fx-font-size: 13px;"/>
+        <VBox alignment="CENTER" spacing="16.0" style="-fx-padding: 34;">
+            <VBox alignment="CENTER" spacing="6.0">
+                <Label style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 24px; -fx-font-weight: bold;" text="Inicio de sesion" />
+                <Label style="-fx-text-fill: #657785; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;" text="Ingrese sus credenciales para continuar al menu principal" />
+            </VBox>
 
-            <GridPane hgap="12.0" vgap="14.0"
-                      style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #d1d5db; -fx-border-radius: 12; -fx-padding: 24;">
-                <Label text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                       style="-fx-text-fill: #374151; -fx-font-weight: bold;"/>
-                <TextField fx:id="txtUsuario" promptText="admin" prefWidth="220.0"
-                           GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+            <GridPane alignment="CENTER" hgap="14.0" maxWidth="540.0" prefWidth="540.0" style="-fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #d0dbe3; -fx-border-radius: 14; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.14), 16, 0, 0, 4);" vgap="13.0">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="120.0" />
+                    <ColumnConstraints minWidth="285.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="40.0" />
+                    <RowConstraints minHeight="40.0" />
+                    <RowConstraints minHeight="14.0" />
+                    <RowConstraints minHeight="48.0" />
+                    <RowConstraints minHeight="36.0" />
+                </rowConstraints>
 
-                <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1"
-                       style="-fx-text-fill: #374151; -fx-font-weight: bold;"/>
-                <PasswordField fx:id="txtPassword" promptText="1234" prefWidth="220.0"
-                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold;" text="Usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="txtUsuario" prefWidth="285.0" promptText="Ingrese el usuario" style="-fx-background-color: #f8fbfc; -fx-border-color: #c8d5df; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <tooltip>
+                        <Tooltip text="Usuario de prueba: admin" />
+                    </tooltip>
+                </TextField>
 
-                <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <Button cancelButton="true" onAction="#salir" text="Salir"
-                            style="-fx-background-color: #f3f4f6; -fx-border-color: #d1d5db; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #374151;"/>
-                    <Button fx:id="btnIniciar" defaultButton="true" onAction="#iniciarSesion" text="Entrar"
-                            style="-fx-background-color: #dcfce7; -fx-border-color: #4ade80; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-weight: bold; -fx-text-fill: #166534;"/>
+                <Label style="-fx-text-fill: #263845; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 13px; -fx-font-weight: bold;" text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <PasswordField fx:id="txtPassword" prefWidth="285.0" promptText="Ingrese la contraseña" style="-fx-background-color: #f8fbfc; -fx-border-color: #c8d5df; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 9; -fx-font-family: 'Segoe UI'; -fx-font-size: 13px;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <tooltip>
+                        <Tooltip text="Contrasena de prueba: 1234" />
+                    </tooltip>
+                </PasswordField>
+
+                <Separator GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+
+                <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Button cancelButton="true" onAction="#salir" style="-fx-background-color: #fff5f5; -fx-border-color: #d99a9a; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #8a1f1f; -fx-font-family: 'Segoe UI Semibold'; -fx-padding: 8 16;" text="Salir">
+                        <tooltip>
+                            <Tooltip text="Solicita confirmacion antes de cerrar la aplicacion" />
+                        </tooltip>
+                    </Button>
+                    <Button fx:id="btnIniciar" defaultButton="true" onAction="#iniciarSesion" style="-fx-background-color: #0e7182; -fx-background-radius: 8; -fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold; -fx-padding: 8 20;" text="Iniciar sesion">
+                        <tooltip>
+                            <Tooltip text="Valida los campos y abre la ventana principal" />
+                        </tooltip>
+                    </Button>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" spacing="8.0" style="-fx-background-color: #f4f8fa; -fx-background-radius: 8; -fx-border-color: #d8e4ea; -fx-border-radius: 8; -fx-padding: 8 10;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                    <Label style="-fx-text-fill: #506575; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 12px;" text="Credenciales:" />
+                    <Label style="-fx-text-fill: #173042; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 12px; -fx-font-weight: bold;" text="admin / 1234" />
                 </HBox>
             </GridPane>
         </VBox>
     </center>
 
-    <bottom>
-        <HBox alignment="CENTER_LEFT" style="-fx-background-color: white; -fx-padding: 10 18;">
-            <Label text="Credenciales de prueba: admin / 1234"
-                   style="-fx-text-fill: #6b7280; -fx-font-size: 12px;"/>
-        </HBox>
-    </bottom>
-
-    <padding>
-        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0"/>
-    </padding>
 </BorderPane>

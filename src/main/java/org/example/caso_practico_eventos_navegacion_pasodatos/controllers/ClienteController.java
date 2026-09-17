@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -36,6 +37,7 @@ public class ClienteController {
     @FXML private ToggleGroup tgTipoSolicitud;
     @FXML private CheckBox chkSoporteTecnico;
     @FXML private CheckBox chkMantenimiento;
+    @FXML private ListView<String> lstServiciosSeleccionados;
     @FXML private ImageView imgFoto;
     @FXML private Button btnCancelar;
 
@@ -49,21 +51,42 @@ public class ClienteController {
     @FXML
     public void initialize() {
         cmbTipoCliente.getItems().addAll("Persona Natural", "Empresa");
-        cmbCiudad.getItems().addAll("Managua", "León", "Granada", "Masaya");
+        cmbCiudad.getItems().addAll(
+                "Boaco",
+                "Bluefields",
+                "Chinandega",
+                "Esteli",
+                "Granada",
+                "Jinotega",
+                "Jinotepe",
+                "Juigalpa",
+                "Leon",
+                "Managua",
+                "Masaya",
+                "Matagalpa",
+                "Ocotal",
+                "Puerto Cabezas",
+                "Rivas",
+                "San Carlos",
+                "Somoto"
+        );
 
         txtNombres.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (!event.getCharacter().matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]")) {
+            if (!event.getCharacter().matches("[a-zA-Z\\s]")) {
                 event.consume();
             }
         });
+
+        chkSoporteTecnico.setOnAction(this::actualizarServiciosSeleccionados);
+        chkMantenimiento.setOnAction(this::actualizarServiciosSeleccionados);
     }
 
     @FXML
     void seleccionarFoto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar Fotografía");
+        fileChooser.setTitle("Seleccionar Fotografia");
         fileChooser.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg")
         );
 
         Stage stage = (Stage) txtNombres.getScene().getWindow();
@@ -93,7 +116,7 @@ public class ClienteController {
 
         List<String> servicios = new ArrayList<>();
         if (chkSoporteTecnico.isSelected()) {
-            servicios.add("Soporte Técnico");
+            servicios.add("Soporte tecnico");
         }
         if (chkMantenimiento.isSelected()) {
             servicios.add("Mantenimiento");
@@ -108,7 +131,7 @@ public class ClienteController {
                     ? Alert.AlertType.WARNING
                     : Alert.AlertType.ERROR;
             Alert alert = new Alert(tipoAlerta, resultado.getMensaje());
-            alert.setHeaderText("Error de Validación");
+            alert.setHeaderText("Error de Validacion");
             alert.showAndWait();
             return;
         }
@@ -132,6 +155,7 @@ public class ClienteController {
         }
         chkSoporteTecnico.setSelected(false);
         chkMantenimiento.setSelected(false);
+        actualizarServiciosSeleccionados(null);
         imgFoto.setImage(null);
         rutaImagenSeleccionada = "";
     }
@@ -140,5 +164,16 @@ public class ClienteController {
     void cancelar(ActionEvent event) {
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    void actualizarServiciosSeleccionados(ActionEvent event) {
+        lstServiciosSeleccionados.getItems().clear();
+        if (chkSoporteTecnico.isSelected()) {
+            lstServiciosSeleccionados.getItems().add("Soporte tecnico");
+        }
+        if (chkMantenimiento.isSelected()) {
+            lstServiciosSeleccionados.getItems().add("Mantenimiento");
+        }
     }
 }

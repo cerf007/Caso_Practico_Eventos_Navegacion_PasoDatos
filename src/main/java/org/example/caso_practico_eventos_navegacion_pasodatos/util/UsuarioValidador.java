@@ -15,7 +15,7 @@ public class UsuarioValidador implements Validador<Usuario> {
         }
 
         if (usuario.getPassword() == null || usuario.getPassword().isBlank()) {
-            return ResultadoValidacion.error("El campo de contraseña es obligatorio.");
+            return ResultadoValidacion.error("El campo de contrasena es obligatorio.");
         }
 
         return ResultadoValidacion.exito();

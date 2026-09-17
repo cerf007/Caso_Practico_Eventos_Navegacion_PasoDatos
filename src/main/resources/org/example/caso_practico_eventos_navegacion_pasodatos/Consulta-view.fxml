@@ -5,28 +5,53 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="430.0" prefWidth="680.0" spacing="12.0"
-      xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.ConsultaController">
-    <padding>
-        <Insets bottom="18.0" left="18.0" right="18.0" top="18.0"/>
-    </padding>
+<BorderPane prefHeight="560.0" prefWidth="880.0"
+            style="-fx-background-color: #eef3f6;"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.caso_practico_eventos_navegacion_pasodatos.controllers.ConsultaController">
+    <top>
+        <VBox spacing="3.0" style="-fx-background-color: linear-gradient(to right, #0f2d3d, #1f5d73); -fx-padding: 18 28;">
+            <Label text="Consulta de clientes"
+                   style="-fx-text-fill: white; -fx-font-family: 'Segoe UI Semibold'; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Doble clic sobre un cliente para abrir el detalle de la solicitud"
+                   style="-fx-text-fill: #d6e8ef; -fx-font-family: 'Segoe UI'; -fx-font-size: 12px;"/>
+        </VBox>
+    </top>
 
-    <Label text="Consulta de Clientes"/>
-    <TableView fx:id="tblClientes" onMouseClicked="#manejarClicTabla" prefHeight="320.0">
-        <columns>
-            <TableColumn fx:id="colNombres" prefWidth="190.0" text="Nombre completo"/>
-            <TableColumn fx:id="colTipo" prefWidth="130.0" text="Tipo"/>
-            <TableColumn fx:id="colCiudad" prefWidth="120.0" text="Ciudad"/>
-            <TableColumn fx:id="colSolicitud" prefWidth="160.0" text="Solicitud"/>
-        </columns>
-    </TableView>
+    <center>
+        <TableView fx:id="tblClientes" onMouseClicked="#manejarClicTabla" prefHeight="400.0"
+                   style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #d0dbe3; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(15,45,61,0.13), 14, 0, 0, 3);">
+            <BorderPane.margin>
+                <Insets bottom="22.0" left="22.0" right="22.0" top="22.0"/>
+            </BorderPane.margin>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+            <columns>
+                <TableColumn fx:id="colNombres" prefWidth="220.0" text="Nombre completo"/>
+                <TableColumn fx:id="colTipo" prefWidth="140.0" text="Tipo de cliente"/>
+                <TableColumn fx:id="colCiudad" prefWidth="130.0" text="Ciudad"/>
+                <TableColumn fx:id="colFechaNacimiento" prefWidth="160.0" text="Fecha nacimiento"/>
+                <TableColumn fx:id="colSolicitud" prefWidth="150.0" text="Tipo solicitud"/>
+            </columns>
+        </TableView>
+    </center>
 
-    <HBox alignment="CENTER_RIGHT">
-        <Button fx:id="btnCerrar" cancelButton="true" onAction="#cerrarVentana" text="Cerrar"/>
-    </HBox>
-</VBox>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT"
+              style="-fx-background-color: white; -fx-border-color: #dce5ec transparent transparent transparent; -fx-padding: 12 20;">
+            <Button fx:id="btnCerrar" text="Volver al menu" cancelButton="true" onAction="#cerrarVentana"
+                    style="-fx-background-color: #f7fafc; -fx-border-color: #b7c5cf; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #173042; -fx-padding: 8 16;">
+                <tooltip>
+                    <Tooltip text="Cierra la consulta y vuelve al menu"/>
+                </tooltip>
+            </Button>
+        </HBox>
+    </bottom>
+</BorderPane>

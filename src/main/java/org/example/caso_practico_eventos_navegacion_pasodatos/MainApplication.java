@@ -14,7 +14,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("IniciarSesion-view.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
-        stage.setTitle("Inicio de sesión");
+        stage.setTitle("Inicio de sesion");
         stage.setScene(scene);
         stage.setMinWidth(860);
         stage.setMinHeight(540);
